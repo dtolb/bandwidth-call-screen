@@ -1,18 +1,18 @@
 
 /* Import our Modules */
 const Bandwidth = require('node-bandwidth');
-const express    = require("express");
-const bodyParser = require("body-parser");
+const express    = require('express');
+const bodyParser = require('body-parser');
 const path       = require('path');
 
 /* Express Setup */
 let app  = express();
-let http = require("http").Server(app);
+let http = require('http').Server(app);
 app.use(bodyParser.json());
 app.set('port', (process.env.PORT || 3000));
 
 /* Setup our Bandwidth information */
-const forwardToNumber = '';
+const forwardToNumber = process.env.FORWARD_TO_NUMBER;
 const myCreds = {
   userId    : process.env.BANDWIDTH_USER_ID,
   apiToken  : process.env.BANDWIDTH_API_TOKEN,
@@ -23,7 +23,7 @@ const bandwidthAPI = new Bandwidth(myCreds);
 
 const handleAnswer = async (event) => {
   try {
-    await bandwidthAPI.Call.speakSentence(event.callId, "Please state your name then press any key");
+    await bandwidthAPI.Call.speakSentence(event.callId, 'Please state your name then press any key');
   }
   catch (e) {
     console.log('Error trying to handle answer');
@@ -84,13 +84,14 @@ const handleRecording = async (event) => {
 };
 
 /* Serve our lil website */
-app.get("/", function (req, res) {
-  res.send("Hello World 👋 🌎");
+app.get('/', function (req, res) {
+  res.send('Hello World 👋 🌎');
 });
 
 app.post('/incoming-call', (req, res) => {
   res.sendStatus(200); //go ahead and acknowledge the event from Bandwidth
   const event = req.body;
+  console.log(`Received the ${event.eventType} event for ${event.callId}`);
   switch (event.eventType.toLowerCase()) {
     case 'answer':
       handleAnswer(event);
@@ -105,7 +106,6 @@ app.post('/incoming-call', (req, res) => {
       handleRecording(event);
       break;
     default:
-      console.log(`Received the ${event.eventType} event for ${event.callId}`);
       break;
   }
 });
