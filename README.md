@@ -2,8 +2,7 @@
 
 ## Assumptions
 * You have signed up for the [Bandwidth voice & messaging APIs](https://app.bandwidth.com)
-* You are familiar with how to:
-  * [Receiving incoming calls](http://dev.bandwidth.com/howto/incomingCallandMessaging.html)
+* You are familiar with how to [receiving incoming calls](http://dev.bandwidth.com/howto/incomingCallandMessaging.html)
 
 ## Setup
 
