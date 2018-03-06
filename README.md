@@ -1,5 +1,7 @@
 # Bandwidth Call Screen
 
+This is the NodeJS code to follow along with the [call-screening](http://dev.bandwidth.com/howto/callScreen.html) building block on the Bandwidth dev site.
+
 ## Assumptions
 * You have signed up for the [Bandwidth voice & messaging APIs](https://app.bandwidth.com)
 * You are familiar with how to [receiving incoming calls](http://dev.bandwidth.com/howto/incomingCallandMessaging.html)
